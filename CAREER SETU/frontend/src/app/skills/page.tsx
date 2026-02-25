@@ -34,7 +34,7 @@ export default function SkillsPage() {
         if (!selectedRole) return;
         setLoading(true);
         try {
-            const report = await api.getSkillGap(userSkills, selectedRole);
+            const report = await api.getSkillGap(userSkills.join(", "), selectedRole);
             const role = JOB_ROLES.find(r => r.id === selectedRole);
 
             const gapData: SkillGap[] = role?.requiredSkills.map(skill => {
