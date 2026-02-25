@@ -77,9 +77,24 @@ graph TD
 
 ## ⚙️ Quick Start Guide
 
+## 📂 Project Structure
+```bash
+CAREER-SETU/
+├── backend/                # Server-side logic, API endpoints, and AI integration
+├── frontend/               # User interface (React/Next.js or similar)
+├── .gitignore              # Files to be excluded from Git
+├── README.md               # Project documentation
+├── TESTING.md              # Documentation for running tests
+├── docker-compose.yml      # Docker configuration for containerized deployment
+├── final_push.bat          # Automation script for final deployment/push
+├── push_project.bat        # Helper script for git workflow
+└── sample_resume.txt       # Example data for testing resume parsing
+``` 
 ### 📂 Repository Clone
 ```bash
 git clone https://github.com/sachinyaduvanshi553-debug/CAREER-SETU---AI.git
+```
+```bash
 cd CAREER-SETU---AI
 ```
 
@@ -94,20 +109,58 @@ Access at:
 - **Web App**: `http://localhost:3000`
 - **Interactive API Docs**: `http://localhost:8000/docs`
 
+📸 Screenshots
+###  🏠 Home Page
+<p align="center">
+  <img src="./HomePage.png" alt="Home Screenshot" width="700" />
+</p>
+
+###  🏠 Home Page
+<p align="center">
+  <img src="./HomePage.png" alt="Home Screenshot" width="700" />
+</p>
+
+###  🏠 Home Page
+<p align="center">
+  <img src="./HomePage.png" alt="Home Screenshot" width="700" />
+</p>
+
+###  🏠 Home Page
+<p align="center">
+  <img src="./HomePage.png" alt="Home Screenshot" width="700" />
+</p>
+
+###  🏠 Home Page
+<p align="center">
+  <img src="./HomePage.png" alt="Home Screenshot" width="700" />
+</p>
+
+###  🏠 Home Page
+<p align="center">
+  <img src="./HomePage.png" alt="Home Screenshot" width="700" />
+</p>
+
 ### 🐍 Manual Setup (Developer Mode)
 
 #### 1. Backend
 ```bash
 cd backend
+```
 pip install -r requirements.txt
+```bash
 python -m spacy download en_core_web_sm
+```
+```bash
 python -m app.main
 ```
 
 #### 2. Frontend
 ```bash
 cd frontend
+```
+```bash
 npm install
+```
 npm run dev
 ```
 
