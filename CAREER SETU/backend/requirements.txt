@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pydantic
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+spacy
+scikit-learn
+pandas
+numpy
+google-generativeai
+pytest
+httpx
+python-dotenv
+# en_core_web_sm will need to be installed separately via spacy download
