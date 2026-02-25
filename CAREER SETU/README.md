@@ -160,7 +160,7 @@ Access at:
 </p>
 
 <p align="center">
-  <img src="./Screenshot 2026-02-25 133228.png" alt="Home Screenshot" width="400" height="250" />
+  <img src="./Screenshot 2026-02-25 133328.png" alt="Home Screenshot" width="400" height="250" />
 </p>
 
 <p align="center">
@@ -168,7 +168,7 @@ Access at:
 </p>
 
 <p align="center">
-  <img src="./Screenshot 2026-02-25 1323419.png" alt="Home Screenshot" width="400" height="250" />
+  <img src="./Screenshot 2026-02-25 133419.png" alt="Home Screenshot" width="400" height="250" />
 </p>
 
 
