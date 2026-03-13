@@ -8,8 +8,14 @@ spacy
 scikit-learn
 pandas
 numpy
-google-generativeai
+google-genai
 pytest
 httpx
 python-dotenv
+pypdf
+sentence-transformers
+torch
+xgboost
+joblib
+sentencepiece
 # en_core_web_sm will need to be installed separately via spacy download
