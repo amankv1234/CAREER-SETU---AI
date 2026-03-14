@@ -9,8 +9,7 @@ class LocalCareerRecommender:
         self.model = None
         self.mlb = None
         try:
-            self.model = joblib.load(os.path.join(models_dir, "career_recommendation_model.joblib"))
-            self.mlb = joblib.load(os.path.join(models_dir, "skills_binarizer.joblib"))
+            self.model = joblib.load(os.path.join(modelir, "skills_binarizer.joblib"))
             print("Loaded career recommendation model successfully.")
         except Exception as e:
             print(f"Warning: Could not load career recommendation model: {e}")
@@ -18,7 +17,8 @@ class LocalCareerRecommender:
     def recommend(self, skills: List[str]) -> List[str]:
         if not self.model or not self.mlb:
             return []
-
+s_dir, "career_recommendation_model.joblib"))
+            self.mlb = joblib.load(os.path.join(models_d
         try:
             # Transform input skills
             X = self.mlb.transform([skills])

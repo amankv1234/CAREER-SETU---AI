@@ -1,4 +1,4 @@
-# Backend Dockerfile - Production Ready
+# Backend Dockerfile - Production Ready (CPU-Only, Render Optimized)
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -8,24 +8,35 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first (better Docker layer caching)
-COPY requirements.txt .
+# ── Step 1: Install CPU-only PyTorch FIRST ──────────────────────────────────
+# sentence-transformers pulls torch as a dependency. If torch is already
+# installed (CPU wheel), pip will reuse it and skip the massive CUDA packages
+# (torch-GPU + all nvidia-* libs = ~3 GB). CPU wheel is only ~200 MB.
+RUN pip install --no-cache-dir \
+    torch \
+    --index-url https://download.pytorch.org/whl/cpu
 
-# Install Python dependencies
+# ── Step 2: Install remaining requirements ────────────────────────────────────
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Download spacy language model
+# ── Step 3: Download spaCy language model ────────────────────────────────────
 RUN python -m spacy download en_core_web_sm
 
-# Copy the entire backend source into /app
-# This gives us: /app/app/, /app/ml_models/, /app/models/
+# ── Step 4: Pre-cache sentence-transformers model into the image ─────────────
+# Without this, the model (~90 MB) downloads from HuggingFace at container
+# startup, which blocks the port from opening and causes Render's health check
+# to fail ("No open ports detected").
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2'); print('Model cached OK')"
+
+# ── Step 5: Copy application source ──────────────────────────────────────────
 COPY . .
 
-# Set PYTHONPATH so that 'app' and 'ml_models' are importable as top-level packages
+# Set PYTHONPATH so that `app` and `ml_models` are top-level importable
 ENV PYTHONPATH=/app
 
-# Expose the port (Render overrides this via PORT env var)
+# Expose default port (Render overrides via $PORT env var)
 EXPOSE 8000
 
-# Use shell form so $PORT env var is expanded at container runtime
+# Shell form so $PORT is expanded at runtime
 CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1
