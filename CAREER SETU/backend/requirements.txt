@@ -1,5 +1,5 @@
 fastapi
-uvicorn
+uvicorn[standard]
 pydantic
 python-multipart
 python-jose[cryptography]
@@ -9,6 +9,7 @@ scikit-learn
 pandas
 numpy
 google-genai
+sentence-transformers
 pytest
 httpx
 python-dotenv
