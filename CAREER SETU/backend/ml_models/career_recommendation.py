@@ -4,21 +4,31 @@ from typing import List
 
 
 class LocalCareerRecommender:
+    """
+    Uses joblib to load pre-trained models for career recommendation.
+    """
+
     def __init__(self):
         models_dir = os.path.join(os.path.dirname(__file__), "../models")
         self.model = None
         self.mlb = None
         try:
-            self.model = joblib.load(os.path.join(modelir, "skills_binarizer.joblib"))
-            print("Loaded career recommendation model successfully.")
+            model_path = os.path.join(models_dir, "career_recommendation_model.joblib")
+            mlb_path = os.path.join(models_dir, "skills_binarizer.joblib")
+            
+            if os.path.exists(model_path) and os.path.exists(mlb_path):
+                self.model = joblib.load(model_path)
+                self.mlb = joblib.load(mlb_path)
+                print("Loaded career recommendation models successfully.")
+            else:
+                print(f"Warning: Model files not found in {models_dir}")
         except Exception as e:
             print(f"Warning: Could not load career recommendation model: {e}")
 
     def recommend(self, skills: List[str]) -> List[str]:
         if not self.model or not self.mlb:
             return []
-s_dir, "career_recommendation_model.joblib"))
-            self.mlb = joblib.load(os.path.join(models_d
+
         try:
             # Transform input skills
             X = self.mlb.transform([skills])
